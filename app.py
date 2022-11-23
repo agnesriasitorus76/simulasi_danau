@@ -17,8 +17,8 @@ app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTST
 #membaca file
 sheet_inflow = "inflow"
 sheet_outflow = "outflow"
-url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzEHx9j46kH6GAYlbyKRCz5-Cbic2OaX2TMjFY1XI8uWLifG37k-CR80YReu8KsCntEjdvMOMmlkpy/pub?output=csv&sheet={sheet_inflow}"
-url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTzEHx9j46kH6GAYlbyKRCz5-Cbic2OaX2TMjFY1XI8uWLifG37k-CR80YReu8KsCntEjdvMOMmlkpy/pub?output=csv&sheet={sheet_outflow}"
+url_inflow = "https://docs.google.com/spreadsheets/d/1KB0BThqmbpY8WEbFY3evlU3SkWDs3tZE1pYqZnkvJ-o/edit?usp=sharing{sheet_inflow}"
+url_outflow = url="https://docs.google.com/spreadsheets/d/1g6AAUpOeiK9Twn-QmEm2-NHh0GbMm0OlestqN_YtBUU/edit?usp=sharing{sheet_outflow}"
 df_inflow = pd.read_csv(url_inflow)
 df_outflow = pd.read_csv(url_outflow)
 
@@ -66,7 +66,7 @@ app.layout = html.Div(
 )
 
 #interaksi aplikasi
-@app.callback(
+app.callback(
     Output(component_id='simulation-result', component_property='figure'),
     Input('run-button', 'n_clicks')
 )
