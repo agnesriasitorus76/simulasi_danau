@@ -79,7 +79,7 @@ def graph_update(n_clicks):
         inout = df_inflow["Data"].values - df_outflow["Data"].values
         N = len(inout)
         u = np.zeros(N)
-        u0 = 4000
+        u0 = 12.750
         u[0] = u0
         dt = 1
 
