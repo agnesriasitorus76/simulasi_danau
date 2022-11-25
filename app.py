@@ -17,8 +17,8 @@ app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTST
 #membaca file
 sheet_inflow = "inflow"
 sheet_outflow = "outflow"
-url_inflow = "https://docs.google.com/spreadsheets/d/1KB0BThqmbpY8WEbFY3evlU3SkWDs3tZE1pYqZnkvJ-o/edit?usp=sharing{sheet_inflow}"
-url_outflow = url="https://docs.google.com/spreadsheets/d/1g6AAUpOeiK9Twn-QmEm2-NHh0GbMm0OlestqN_YtBUU/edit?usp=sharing{sheet_outflow}"
+url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqJK1bZfqNiH4yw_E_z_Wo59X_oSDBJzgxtims--_MEHp0obhwUL3WxBEw1pCdXNSzde4oBogxMqIw/pub?gid=0&single=true&output=csv&sheet={sheet_inflow}"
+url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vSqJK1bZfqNiH4yw_E_z_Wo59X_oSDBJzgxtims--_MEHp0obhwUL3WxBEw1pCdXNSzde4oBogxMqIw/pub?gid=899896751&single=true&output=csv&sheet={sheet_outflow}"
 df_inflow = pd.read_csv(url_inflow)
 df_outflow = pd.read_csv(url_outflow)
 
@@ -31,11 +31,11 @@ inflow_fig.add_scatter(name='Inflow', x=df_inflow['Bulan'], y=df_inflow['Data'])
 inflow_fig.layout.title = 'Inflow'
 
 outflow_fig = go.FigureWidget()
-outflow_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
+outflow_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Qout'])
 outflow_fig.layout.title = 'Outflow'
 
 simulation_fig = go.FigureWidget()
-# simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
+# simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Qout'])
 simulation_fig.layout.title = 'Simulation'
 
 
@@ -76,7 +76,7 @@ def graph_update(n_clicks):
     # filtering based on the slide and dropdown selection
     if n_clicks >=1:
         #program numerik ---start----
-        inout = df_inflow["Data"].values - df_outflow["Data"].values
+        inout = df_inflow["Data"].values - df_outflow["Qout"].values
         N = len(inout)
         u = np.zeros(N)
         u0 = 12.750
